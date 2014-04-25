@@ -6,15 +6,11 @@
 
 #define SHORTMAX        40
 #define FULLMAX         255
+#define EOR		"End of Records"
 #ifndef CL_OPTS
 # define CL_OPTS        1
 #endif
 #define DEBUGGING	true
-/*  
- * Constants (are these only bogus in C++, or should I
- * be staying away from these in standard C, as well?)
- */
-const char	EventFilename	=	".remevents";
 
 /*  Data Structures  */
 typedef struct chowFormation {
@@ -23,6 +19,12 @@ typedef struct chowFormation {
         char    msg[FULLMAX];
         time_t  bz;
 } ChowFormation;
+
+/*  
+ * Constants (are these only bogus in C++, or should I
+ * be staying away from these in standard C, as well?)
+ */
+const char	EventFilename	=	".remevents";
 const size_t	RecSize		=	sizeof(ChowFormation);
 
 /*  Mutlipurpose Functions  */
@@ -41,23 +43,10 @@ void *read_events(void) {
 		(void) memcpy(bufPtr[(RecSize * recCount++)],
 				miscPtr, RecSize);
 		(void) realloc(bufPtr, recCount); /* here, too */
-		strcpy(bufPtr->title, "End of Buffer");
+		strcpy(bufPtr->title, EOR);
 	}
 
 	return (void *) bufPtr;
 }
 
-int event_editor(void *evnts, bool *fs) {
-	int eventCount	=	0;
 
-	if ((evnts = read_events()) == NULL) {
-		if (DEBUGGING) {
-			printf("Error encountered in ");
-			printf("read_events()\n\n");
-			return -1;
-		}
-		/* other error handling code */
-	}
-
-	while (strcmp(evnts->title, "End of Buffer") != 0) {
-		

@@ -14,14 +14,19 @@
  *
  * int ac: count of command line parameters
  * char *opts: array of command line options
+ *
+ * NOTE: This function requires a global level (void *) to point
+ * to the array of booleans (variable-length) to hold the current
+ * program's command line flag toggles.  This is currently defaulting
+ * to the name 'flag_table', set in CMDLINEFLAGS in project's toplevel
+ * .h file.
  */
-
 int * pcline(int ac, char *opts) {
-	void	*flag_table;
+	void *	CMDLINEFLAGS;
 	char	cntr1, cntr2 = 0;
 
-	flag_table = malloc(sizeof(bool) * CL_OPTS);
-	if (flag_table < 0) return NULL;	/* err */
+	CMDLINEFLAGS = malloc(sizeof(bool) * CL_OPTS);
+	if (CMDLINEFLAGS < 0) return NULL;	/* err */
 
 	for (char ouah = 0; ouah < ac; ouah++) {
 		if (strncmp(opts[ouah], "--", (size_t) 2) != 0) {

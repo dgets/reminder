@@ -26,6 +26,7 @@
 
 /*  External Functions (prototypes)  */
 extern int *pcline(int ac, char *opts);
+extern void *read_events(void *);
 extern int event_editor(void *events, bool *fullscreen);
 /* extern void *read_events(void *events); */
 extern void list_events(void *events);
@@ -33,8 +34,10 @@ extern void add_events(void *events);
 extern void del_events(void *events);
 extern void ed_event(void *events);
 
+/* primary routines */
 extern int notifyd(void *events);
 
+/* ncurses/display */
 extern bool init_ncurses(void);
 
 void *read_events(void *evnts) {

@@ -11,7 +11,7 @@
 # define CL_OPTS        1
 #endif
 #define DEBUGGING	true
-#define CMDLINEFLAGS	"flag_table"
+/* #define CMDLINEFLAGS	"flag_table" */
 
 /*  Data Structures  */
 typedef struct chowFormation {
@@ -25,7 +25,7 @@ typedef struct chowFormation {
  * Constants (are these only bogus in C++, or should I
  * be staying away from these in standard C, as well?)
  */
-const char	EventFilename	=	".remevents";
+const char *	EventFilename	=	".remevents";
 const size_t	RecSize		=	sizeof(ChowFormation);
 
 /*  Mutlipurpose Functions  */

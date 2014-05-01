@@ -9,7 +9,50 @@
  */
 
 void display_notice(void *eList, int ndx) {
+	char 	*tit, *bod, svrty;
+	time_t	alertTime;
+	int	boxlx, boxry, len, hei, wrapx, wrapy, lines = 0,
+		stx, sty;
 
+	WINDOW *popup;
+
+	tit 		= 	(ChowFormation *)eList[ndx]->title;
+	bod 		= 	(ChowFormation *)eList[ndx]->msg;
+	alertTime	=	(ChowFormation *)eList[ndx]->bz;
+	svrty		=	(ChowFormation *)eList[ndx]->severity;
+
+	hei 		=	(int)getmaxx();
+	len		=	(int)getmaxy();
+
+	if (len > 5) {
+		wrapy = (len - 3);
+		sty = (wrapy - 2);
+	} else if (len > 0) {
+		sty = wrapy = len;
+	} else {
+		sty = wrapy = -1;
+		warn("Something weird returned via getmaxy()\n");
+	}
+
+	if (hei > 5) {
+		wrapx = (hei - 3);
+		stx = (wrapx - 2);
+	} else if (hei > 0) {
+		stx = wrapx = hei;
+	} else {
+		stx = wrapx = -1;
+		warn("Something weird returned via getmaxx()\n");
+	}
+
+	if ((popup = newwin(((bod % hei) + 1), ((len % 
+
+	
+	/* 
+	 * TODO:
+	 * going to need wordwrapping, etc 
+	 */
+	
+	if (strlen(bod) > (wrapx) -
 }
 
 int notifyd(void *evnts) {
